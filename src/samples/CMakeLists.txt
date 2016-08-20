@@ -58,4 +58,3 @@ INSTALL(TARGETS paho_c_sub
                 MQTTClient_publish_async
     RUNTIME DESTINATION bin
     LIBRARY DESTINATION lib)
-

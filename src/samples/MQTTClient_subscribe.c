@@ -21,7 +21,6 @@
 
 #define ADDRESS     "tcp://localhost:1883"
 #define CLIENTID    "ExampleClientSub"
-#define TOPIC       "Tz/+"
 #define PAYLOAD     "Hello World!"
 #define QOS         1
 #define TIMEOUT     10000L
@@ -61,7 +60,22 @@ void connlost(void *context, char *cause)
 }
 
 int main(int argc, char* argv[])
-{
+{   
+    char topicName[50];
+    printf("Program name %s\n", argv[0]);
+    if( argc == 2 ){
+	printf("The argument is %s\n", argv[1]);
+        strcpy(topicName, argv[1]);
+        printf("TopicName stored. It's: %s\n", topicName);
+    }
+    else if( argc > 2){
+	printf("Too many argument!\n");
+    }
+    else {
+	printf("One topic name is expected. Use defualt name instead. \n");
+        strcpy(topicName,"MQTT Examples");
+    }
+
     MQTTClient client;
     MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
     int rc;
@@ -80,8 +94,8 @@ int main(int argc, char* argv[])
         exit(EXIT_FAILURE);
     }
     printf("Subscribing to topic %s\nfor client %s using QoS%d\n\n"
-           "Press Q<Enter> to quit\n\n", TOPIC, CLIENTID, QOS);
-    MQTTClient_subscribe(client, TOPIC, QOS);
+           "Press Q<Enter> to quit\n\n", topicName, CLIENTID, QOS);
+    MQTTClient_subscribe(client, topicName, QOS);
 
     do 
     {
