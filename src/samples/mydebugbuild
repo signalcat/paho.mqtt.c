@@ -1,10 +1,11 @@
 #!/bin/bash
 # My make script to recompile and debug build paho.mqtt.c/src/samples file
 echo "Begin compiling and building debug version of the sample mqtt c client..."
-sudo rm -r /tmp/debug.paho/paho-1.0.3-Linux
-sudo rm -r /tmp/debug.paho/paho-1.0.3-Linux.tar.gz
-cd /tmp/debug.paho/
+sudo rm -r /opt/debug.paho/paho-1.0.3-Linux
+sudo rm -r /opt/debug.paho/paho-1.0.3-Linux.tar.gz
+
+cd /opt/debug.paho/
 sudo cmake -GNinja -DPAHO_WITH_SSL=TRUE -DPAHO_BUILD_DOCUMENTATION=TRUE -DPAHO_BUILD_SAMPLES=TRUE -DCMAKE_BUILD_TYPE=Debug /opt/mqtt/paho.mqtt.c
 sudo ninja package
-sudo tar -zxvf /tmp/debug.paho/paho-1.0.3-Linux.tar.gz
+sudo tar -zxvf /opt/debug.paho/paho-1.0.3-Linux.tar.gz
 echo "Debug build done!"
